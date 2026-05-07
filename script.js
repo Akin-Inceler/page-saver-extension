@@ -1,21 +1,35 @@
-
 let myLeads = []
+
 const inputEl = document.getElementById("input-el")
 const saveBtn = document.getElementById("save-btn")
 const ulEl = document.getElementById("ul-el")
 
+let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+
+if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage
+    renderLead()
+}
 
 saveBtn.addEventListener("click", function() {
     myLeads.push(inputEl.value)
-    renderLead()
     inputEl.value = ""
+
+    localStorage.setItem("myLeads", JSON.stringify(myLeads))
+
+    renderLead()
 })
 
 function renderLead() {
-    let listItem = `
-        <li>
-            <a href='${myLeads[myLeads.length - 1]}' target='_blank'>${myLeads[myLeads.length - 1]}</a>
-        </li>
-    `
-    ulEl.innerHTML += listItem
+    let listItems = ""
+
+    for (let i = 0; i < myLeads.length; i++) {
+        listItems += `
+            <li>
+                <a href="${myLeads[i]}" target="_blank">${myLeads[i]}</a>
+            </li>
+        `
+    }
+
+    ulEl.innerHTML = listItems
 }
