@@ -12,6 +12,10 @@ saveBtn.addEventListener("click", function() {
 })
 
 function renderLead() {
-    let listItem = "<li><a href='" + inputEl.value + "' target='_blank'>" + inputEl.value + "</a></li>"
+    let listItem = `
+        <li>
+            <a href='${myLeads[myLeads.length - 1]}' target='_blank'>${myLeads[myLeads.length - 1]}</a>
+        </li>
+    `
     ulEl.innerHTML += listItem
 }
